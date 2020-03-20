@@ -4,8 +4,9 @@ services:
   discovery:
     image: andriidovbenko/docker-services-trainings:docker-discovery-server
     container_name: discovery
+    restart: on-failure
     ports:
-      - 61:8761
+      - 8761:8761
     networks:
     - movie-service
 
@@ -15,7 +16,7 @@ services:
     depends_on:
       - discovery
     ports:
-    - 88:8088
+    - 8888:8888
     networks:
     - movie-service
 
@@ -27,7 +28,7 @@ services:
       - discovery
       - config
     ports:
-    - 83:8083
+    - 8083:8083
     networks:
     - movie-service
 
@@ -39,7 +40,7 @@ services:
       - discovery
       - config
     ports:
-    - 82:8082
+    - 8082:8082
     networks:
     -  movie-service
 
@@ -51,7 +52,7 @@ services:
       - discovery
       - config
     ports:
-    - 84:8084
+    - 8084:8084
     networks:
     - movie-service
 
