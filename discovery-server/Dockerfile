@@ -1,4 +1,5 @@
 FROM openjdk:11
-ADD target/docker-discovery-server.jar docker-discovery-server.jar
+VOLUME /tmp
+COPY ./target/*.jar app.jar
 EXPOSE 8761
-ENTRYPOINT ["java","-jar","/docker-discovery-server.jar"]
+ENTRYPOINT ["java","-jar","/app.jar"]

@@ -1,4 +1,5 @@
 FROM openjdk:11
-ADD target/docker-config-server.jar docker-config-server.jar
+VOLUME /tmp
+COPY ./target/*.jar app.jar
 EXPOSE 8888
-ENTRYPOINT ["java","-jar","/docker-config-server.jar"]
+ENTRYPOINT ["java","-jar","/app.jar"]
