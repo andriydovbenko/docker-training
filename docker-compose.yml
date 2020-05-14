@@ -1,0 +1,53 @@
+version: "3.7"
+services:
+
+  discovery:
+    image: andriidovbenko/docker-services-trainings:docker-discovery-server
+    container_name: discovery
+    restart: on-failure
+    network_mode: host
+    ports:
+      - 8761:8761
+
+  config:
+    image: andriidovbenko/docker-services-trainings:docker-config-server
+    container_name: config
+    network_mode: host
+    depends_on:
+      - discovery
+    ports:
+    - 8888:8888
+
+  movie-info:
+    image: andriidovbenko/docker-services-trainings:docker-movie-info
+    container_name: info
+    restart: on-failure
+    network_mode: host
+    depends_on:
+      - discovery
+      - config
+    ports:
+    - 8083:8083
+
+
+  ratings-data:
+    image: andriidovbenko/docker-services-trainings:docker-ratings-data
+    container_name: ratings
+    network_mode: host
+    restart: on-failure
+    depends_on:
+      - discovery
+      - config
+    ports:
+    - 8082:8082
+
+  movie-catalog:
+    image: andriidovbenko/docker-services-trainings:docker-movie-catalog
+    container_name: catalog
+    network_mode: host
+    restart: on-failure
+    depends_on:
+      - discovery
+      - config
+    ports:
+    - 8084:8084

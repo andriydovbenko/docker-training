@@ -1,0 +1,16 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-server:8761/eureka
+      fetch-registry: true
+      registerWithEureka: true
+spring:
+  application:
+    name: movie-catalog-service
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        serviceId: application-config-server
+        skipSslValidation: true
+      failFast: true
